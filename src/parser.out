@@ -1,0 +1,404 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> line
+Rule 1     line -> Name Equal line NewLine line
+Rule 2     expression -> expression Plus term
+Rule 3     expression -> expression Minus term
+Rule 4     term -> term Times factor
+Rule 5     term -> term Divide factor
+Rule 6     line -> expression
+Rule 7     expression -> term
+Rule 8     term -> factor
+Rule 9     factor -> Integer
+Rule 10    factor -> Floating
+Rule 11    factor -> Name
+Rule 12    factor -> LParen expression RParen
+
+Terminals, with rules where they appear
+
+Divide               : 5
+Equal                : 1
+Floating             : 10
+Integer              : 9
+LParen               : 12
+Minus                : 3
+Name                 : 1 11
+NewLine              : 1
+Plus                 : 2
+RParen               : 12
+Times                : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 2 3 6 12
+factor               : 4 5 8
+line                 : 1 1 0
+term                 : 2 3 4 5 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . line
+    (1) line -> . Name Equal line NewLine line
+    (6) line -> . expression
+    (2) expression -> . expression Plus term
+    (3) expression -> . expression Minus term
+    (7) expression -> . term
+    (4) term -> . term Times factor
+    (5) term -> . term Divide factor
+    (8) term -> . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Name            shift and go to state 2
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    LParen          shift and go to state 3
+
+    line                           shift and go to state 7
+    expression                     shift and go to state 8
+    term                           shift and go to state 1
+    factor                         shift and go to state 4
+
+state 1
+
+    (7) expression -> term .
+    (4) term -> term . Times factor
+    (5) term -> term . Divide factor
+
+    Plus            reduce using rule 7 (expression -> term .)
+    Minus           reduce using rule 7 (expression -> term .)
+    NewLine         reduce using rule 7 (expression -> term .)
+    RParen          reduce using rule 7 (expression -> term .)
+    $end            reduce using rule 7 (expression -> term .)
+    Times           shift and go to state 10
+    Divide          shift and go to state 9
+
+
+state 2
+
+    (1) line -> Name . Equal line NewLine line
+    (11) factor -> Name .
+
+    Equal           shift and go to state 11
+    Times           reduce using rule 11 (factor -> Name .)
+    Divide          reduce using rule 11 (factor -> Name .)
+    Plus            reduce using rule 11 (factor -> Name .)
+    Minus           reduce using rule 11 (factor -> Name .)
+    $end            reduce using rule 11 (factor -> Name .)
+    NewLine         reduce using rule 11 (factor -> Name .)
+
+
+state 3
+
+    (12) factor -> LParen . expression RParen
+    (2) expression -> . expression Plus term
+    (3) expression -> . expression Minus term
+    (7) expression -> . term
+    (4) term -> . term Times factor
+    (5) term -> . term Divide factor
+    (8) term -> . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    Name            shift and go to state 13
+    LParen          shift and go to state 3
+
+    term                           shift and go to state 1
+    expression                     shift and go to state 12
+    factor                         shift and go to state 4
+
+state 4
+
+    (8) term -> factor .
+
+    Times           reduce using rule 8 (term -> factor .)
+    Divide          reduce using rule 8 (term -> factor .)
+    RParen          reduce using rule 8 (term -> factor .)
+    Plus            reduce using rule 8 (term -> factor .)
+    Minus           reduce using rule 8 (term -> factor .)
+    $end            reduce using rule 8 (term -> factor .)
+    NewLine         reduce using rule 8 (term -> factor .)
+
+
+state 5
+
+    (10) factor -> Floating .
+
+    Times           reduce using rule 10 (factor -> Floating .)
+    Divide          reduce using rule 10 (factor -> Floating .)
+    Plus            reduce using rule 10 (factor -> Floating .)
+    Minus           reduce using rule 10 (factor -> Floating .)
+    $end            reduce using rule 10 (factor -> Floating .)
+    NewLine         reduce using rule 10 (factor -> Floating .)
+    RParen          reduce using rule 10 (factor -> Floating .)
+
+
+state 6
+
+    (9) factor -> Integer .
+
+    Times           reduce using rule 9 (factor -> Integer .)
+    Divide          reduce using rule 9 (factor -> Integer .)
+    Plus            reduce using rule 9 (factor -> Integer .)
+    Minus           reduce using rule 9 (factor -> Integer .)
+    $end            reduce using rule 9 (factor -> Integer .)
+    NewLine         reduce using rule 9 (factor -> Integer .)
+    RParen          reduce using rule 9 (factor -> Integer .)
+
+
+state 7
+
+    (0) S' -> line .
+
+
+
+state 8
+
+    (6) line -> expression .
+    (2) expression -> expression . Plus term
+    (3) expression -> expression . Minus term
+
+    $end            reduce using rule 6 (line -> expression .)
+    NewLine         reduce using rule 6 (line -> expression .)
+    Plus            shift and go to state 14
+    Minus           shift and go to state 15
+
+
+state 9
+
+    (5) term -> term Divide . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    Name            shift and go to state 13
+    LParen          shift and go to state 3
+
+    factor                         shift and go to state 16
+
+state 10
+
+    (4) term -> term Times . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    Name            shift and go to state 13
+    LParen          shift and go to state 3
+
+    factor                         shift and go to state 17
+
+state 11
+
+    (1) line -> Name Equal . line NewLine line
+    (1) line -> . Name Equal line NewLine line
+    (6) line -> . expression
+    (2) expression -> . expression Plus term
+    (3) expression -> . expression Minus term
+    (7) expression -> . term
+    (4) term -> . term Times factor
+    (5) term -> . term Divide factor
+    (8) term -> . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Name            shift and go to state 2
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    LParen          shift and go to state 3
+
+    line                           shift and go to state 18
+    expression                     shift and go to state 8
+    term                           shift and go to state 1
+    factor                         shift and go to state 4
+
+state 12
+
+    (12) factor -> LParen expression . RParen
+    (2) expression -> expression . Plus term
+    (3) expression -> expression . Minus term
+
+    RParen          shift and go to state 19
+    Plus            shift and go to state 14
+    Minus           shift and go to state 15
+
+
+state 13
+
+    (11) factor -> Name .
+
+    Times           reduce using rule 11 (factor -> Name .)
+    Divide          reduce using rule 11 (factor -> Name .)
+    RParen          reduce using rule 11 (factor -> Name .)
+    Plus            reduce using rule 11 (factor -> Name .)
+    Minus           reduce using rule 11 (factor -> Name .)
+    $end            reduce using rule 11 (factor -> Name .)
+    NewLine         reduce using rule 11 (factor -> Name .)
+
+
+state 14
+
+    (2) expression -> expression Plus . term
+    (4) term -> . term Times factor
+    (5) term -> . term Divide factor
+    (8) term -> . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    Name            shift and go to state 13
+    LParen          shift and go to state 3
+
+    term                           shift and go to state 20
+    factor                         shift and go to state 4
+
+state 15
+
+    (3) expression -> expression Minus . term
+    (4) term -> . term Times factor
+    (5) term -> . term Divide factor
+    (8) term -> . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    Name            shift and go to state 13
+    LParen          shift and go to state 3
+
+    term                           shift and go to state 21
+    factor                         shift and go to state 4
+
+state 16
+
+    (5) term -> term Divide factor .
+
+    Times           reduce using rule 5 (term -> term Divide factor .)
+    Divide          reduce using rule 5 (term -> term Divide factor .)
+    RParen          reduce using rule 5 (term -> term Divide factor .)
+    Plus            reduce using rule 5 (term -> term Divide factor .)
+    Minus           reduce using rule 5 (term -> term Divide factor .)
+    $end            reduce using rule 5 (term -> term Divide factor .)
+    NewLine         reduce using rule 5 (term -> term Divide factor .)
+
+
+state 17
+
+    (4) term -> term Times factor .
+
+    Times           reduce using rule 4 (term -> term Times factor .)
+    Divide          reduce using rule 4 (term -> term Times factor .)
+    RParen          reduce using rule 4 (term -> term Times factor .)
+    Plus            reduce using rule 4 (term -> term Times factor .)
+    Minus           reduce using rule 4 (term -> term Times factor .)
+    $end            reduce using rule 4 (term -> term Times factor .)
+    NewLine         reduce using rule 4 (term -> term Times factor .)
+
+
+state 18
+
+    (1) line -> Name Equal line . NewLine line
+
+    NewLine         shift and go to state 22
+
+
+state 19
+
+    (12) factor -> LParen expression RParen .
+
+    Times           reduce using rule 12 (factor -> LParen expression RParen .)
+    Divide          reduce using rule 12 (factor -> LParen expression RParen .)
+    Plus            reduce using rule 12 (factor -> LParen expression RParen .)
+    Minus           reduce using rule 12 (factor -> LParen expression RParen .)
+    $end            reduce using rule 12 (factor -> LParen expression RParen .)
+    NewLine         reduce using rule 12 (factor -> LParen expression RParen .)
+    RParen          reduce using rule 12 (factor -> LParen expression RParen .)
+
+
+state 20
+
+    (2) expression -> expression Plus term .
+    (4) term -> term . Times factor
+    (5) term -> term . Divide factor
+
+    Plus            reduce using rule 2 (expression -> expression Plus term .)
+    Minus           reduce using rule 2 (expression -> expression Plus term .)
+    NewLine         reduce using rule 2 (expression -> expression Plus term .)
+    RParen          reduce using rule 2 (expression -> expression Plus term .)
+    $end            reduce using rule 2 (expression -> expression Plus term .)
+    Times           shift and go to state 10
+    Divide          shift and go to state 9
+
+
+state 21
+
+    (3) expression -> expression Minus term .
+    (4) term -> term . Times factor
+    (5) term -> term . Divide factor
+
+    Plus            reduce using rule 3 (expression -> expression Minus term .)
+    Minus           reduce using rule 3 (expression -> expression Minus term .)
+    NewLine         reduce using rule 3 (expression -> expression Minus term .)
+    RParen          reduce using rule 3 (expression -> expression Minus term .)
+    $end            reduce using rule 3 (expression -> expression Minus term .)
+    Times           shift and go to state 10
+    Divide          shift and go to state 9
+
+
+state 22
+
+    (1) line -> Name Equal line NewLine . line
+    (1) line -> . Name Equal line NewLine line
+    (6) line -> . expression
+    (2) expression -> . expression Plus term
+    (3) expression -> . expression Minus term
+    (7) expression -> . term
+    (4) term -> . term Times factor
+    (5) term -> . term Divide factor
+    (8) term -> . factor
+    (9) factor -> . Integer
+    (10) factor -> . Floating
+    (11) factor -> . Name
+    (12) factor -> . LParen expression RParen
+
+    Name            shift and go to state 2
+    Integer         shift and go to state 6
+    Floating        shift and go to state 5
+    LParen          shift and go to state 3
+
+    line                           shift and go to state 23
+    expression                     shift and go to state 8
+    term                           shift and go to state 1
+    factor                         shift and go to state 4
+
+state 23
+
+    (1) line -> Name Equal line NewLine line .
+
+    $end            reduce using rule 1 (line -> Name Equal line NewLine line .)
+    NewLine         reduce using rule 1 (line -> Name Equal line NewLine line .)
+
